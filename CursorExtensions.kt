@@ -1,7 +1,7 @@
 /**
 * Thanks to https://github.com/moezbhatti/qksms
 * Please star the project
-*
+*/
 
 import android.database.Cursor
 import io.reactivex.Flowable
