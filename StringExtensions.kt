@@ -10,7 +10,7 @@ fun String.tail() = this.substring(1)
 fun String.head() = this.substring(0, 1)
 
 /**
-* Very Very Very Very way to parse a string to date
+* Very Very Very Very simple way to parse a string to date
 * You'll not use this in production, pinky promise
 */
 fun String.toDate(format: String): Date = SimpleDateFormat(format).parse(this)
