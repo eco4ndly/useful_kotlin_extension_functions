@@ -27,7 +27,4 @@ fun String.normalizeString() =
 /**
 * URL Encode a string
 */
-fun String.urlEncode(): String {
-
-    return URLEncoder.encode(this, "UTF-8")
-}
+fun String.urlEncode() = URLEncoder.encode(this, "UTF-8")
