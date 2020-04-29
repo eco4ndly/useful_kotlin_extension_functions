@@ -22,3 +22,12 @@ fun String.normalizeString() =
     Normalizer.normalize(this, Normalizer.Form.NFD)
         .toLowerCase()
         .replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
+
+
+/**
+* URL Encode a string
+*/
+fun String.urlEncode(): String {
+
+    return URLEncoder.encode(this, "UTF-8")
+}
