@@ -1,14 +1,14 @@
 /**
  * Extension method to make a view gone
  */
-fun View.gone() {
+fun View.hide() {
   visibility = View.GONE
 }
 
 /**
  * Extension method to make a view visible.
  */
-fun View.visible() {
+fun View.show() {
   visibility = View.VISIBLE
 }
 
@@ -17,6 +17,32 @@ fun View.visible() {
  */
 fun View.invisible() {
   visibility = View.INVISIBLE
+}
+
+/**
+* Show depending upon a condition
+*/
+inline fun <T : View> T.showIf(condition: (T) -> Boolean): T {
+    if (condition(this)) {
+        show()
+    } else {
+        hide()
+    }
+
+    return this
+}
+
+/**
+* Hide depending upon a condition
+*/
+inline fun <T : View> T.hideIf(condition: (T) -> Boolean): T {
+    if (condition(this)) {
+        hide()
+    } else {
+        show()
+    }
+
+    return this
 }
 
 /**
