@@ -28,3 +28,9 @@ fun String.normalizeString() =
 * URL Encode a string
 */
 fun String.urlEncode() = URLEncoder.encode(this, "UTF-8")
+
+
+/**
+* println("14q36w25e".ascending())  // output "123456eqw"
+*/
+fun String.ascending() = String(toCharArray().sortedArray())
