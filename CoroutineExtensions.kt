@@ -20,12 +20,30 @@ fun View.clicks(): Flow<Unit> = callbackFlow {
   }
 }
 
+/**
+ * Flow conversion of edittext text changes
+ * `````Usage``````
+ *  val editText = EditText
+ *  editText
+ *    .textChanges()
+ *    .collect { charSeq ->
+ *    
+ *    }
+ */
 @ExperimentalCoroutinesApi
-fun <E> SendChannel<E>.safeOffer(value: E) = !isClosedForSend && try {
-  offer(value)
-} catch (t: Throwable) {
-  // Ignore all
-  false
+@CheckResult
+fun EditText.textChanges(): Flow<CharSequence?> {
+  return callbackFlow<CharSequence?> {
+    val listener = object : TextWatcher {
+      override fun afterTextChanged(s: Editable?) = Unit
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        safeOffer(s)
+      }
+    }
+    addTextChangedListener(listener)
+    awaitClose { removeTextChangedListener(listener) }
+  }.onStart { emit(text) }
 }
 
 
@@ -75,5 +93,14 @@ fun Any.clicks(vararg views: View, mainScope: CoroutineScope, onClick: (viewId: 
                 onClick.invoke(view.id)
             }.launchIn(mainScope)
     }
+   
+   
+   @ExperimentalCoroutinesApi
+   fun <E> SendChannel<E>.safeOffer(value: E) = !isClosedForSend && try {
+   offer(value)
+   } catch (t: Throwable) {
+   // Ignore all
+   false
+   }
 
 }
