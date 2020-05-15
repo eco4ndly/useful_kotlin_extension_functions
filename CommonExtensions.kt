@@ -10,3 +10,9 @@
  */
 val <T> T.exhaustive: T
   get() = this
+
+
+/**
+* Showing a toast is never been easier
+*/
+fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
