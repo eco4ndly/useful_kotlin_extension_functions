@@ -16,3 +16,21 @@ val <T> T.exhaustive: T
 * Showing a toast is never been easier
 */
 fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+
+/**
+ * Extension function to do shared pref stuffs in a DSLish way
+ * 
+ * ````` Usage ``````
+        preferences.edit {
+            putString(TOKEN, tokenValue)
+        }
+ * ```````````````````
+ */
+@SuppressLint("ApplySharedPref")
+inline fun SharedPreferences.edit(commit: Boolean = false, action: SharedPreferences.Editor.() -> Unit) {
+    val editor = edit()
+    action(editor)
+    if (commit) editor.commit()
+    else editor.apply()
+}
