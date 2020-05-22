@@ -14,8 +14,11 @@ val <T> T.exhaustive: T
 
 /**
 * Showing a toast is never been easier
+* ``` Usage `````
+* //In your activity/fragment class, just call
+* toast("This is a toast")
 */
-fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+fun Context.toast(text: String, duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(this, text, duration).show()
 
 
 /**
